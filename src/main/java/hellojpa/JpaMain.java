@@ -16,12 +16,16 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            List<Member> result = em.createQuery("select m from Member as m where m.id >= 2", Member.class)
-                    .getResultList();
+            //비영속
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HelloJPA");
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            //영속
+            System.out.println("before");
+            em.persist(member);
+            System.out.println("after");
+
 
             tx.commit();
         } catch (Exception e) {
