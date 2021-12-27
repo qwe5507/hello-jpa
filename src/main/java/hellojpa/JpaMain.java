@@ -16,10 +16,15 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            Member member = new Member(250L, "member250");
-            em.persist(member);
+            //영속 상태
+            Member member = em.find(Member.class, 250L);
+            member.setName("AAAAA");
 
-            em.flush();
+//            em.detach(member); //jpa에서 관리 안함
+            em.clear(); // 영속성 컨텍스트 통째로 삭제
+
+            Member member2 = em.find(Member.class, 250L);
+
             System.out.println("=========");
             tx.commit();
         } catch (Exception e) {
