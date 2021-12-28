@@ -16,10 +16,13 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            //영속 상태
-            Member member = em.find(Member.class, 250L);
-            System.out.println("member = " + member.getId());
-            System.out.println("member = " + member.getName());
+            Member member = new Member();
+            member.setId(4L);
+            member.setUsername("c");
+            member.setRoleType(RoleType.GUEST);
+
+            em.persist(member);
+            //영속 상태\
 //            member.setName("AAAAA");
 
 //            em.detach(member); //jpa에서 관리 안함
