@@ -16,19 +16,19 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            Member member = new Member();
-            member.setId(4L);
-            member.setUsername("c");
-            member.setRoleType(RoleType.GUEST);
+            Member member1 = new Member();
+            member1.setUsername("a");
+            Member member2 = new Member();
+            member2.setUsername("b");
+            Member member3 = new Member();
+            member3.setUsername("c");
 
-            em.persist(member);
-            //영속 상태\
-//            member.setName("AAAAA");
-
-//            em.detach(member); //jpa에서 관리 안함
-//            em.clear(); // 영속성 컨텍스트 통째로 삭제
-
-//            Member member2 = em.find(Member.class, 250L);
+            //call1 -> -49 -> 1
+            //call2 -> 1 -> 51 셋팅
+            em.persist(member1); // memory : 1 , db : 51
+            em.persist(member2); // memory : 2 , db : 51
+            em.persist(member3); // memory : 3 , db : 51
+            System.out.println("member.getId() = " + member1.getId());
 
             System.out.println("=========");
             tx.commit();
