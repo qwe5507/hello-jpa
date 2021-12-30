@@ -16,21 +16,24 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            Member member1 = new Member();
-            member1.setUsername("a");
-            Member member2 = new Member();
-            member2.setUsername("b");
-            Member member3 = new Member();
-            member3.setUsername("c");
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            //call1 -> -49 -> 1
-            //call2 -> 1 -> 51 셋팅
-            em.persist(member1); // memory : 1 , db : 51
-            em.persist(member2); // memory : 2 , db : 51
-            em.persist(member3); // memory : 3 , db : 51
-            System.out.println("member.getId() = " + member1.getId());
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            System.out.println("=========");
+            em.flush();
+            em.clear();
+
+            //조회
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
