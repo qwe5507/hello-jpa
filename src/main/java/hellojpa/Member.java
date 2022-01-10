@@ -11,20 +11,20 @@ public class Member {
     private String username;
     //기간
     @Embedded
-    private Period workPeriod = null;
+    private Period workPeriod;
     //주소
     @Embedded
     private Address homeAddress;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city",
-                            column = @Column(name = "WORK_CITY")),
-            @AttributeOverride(name = "street",
-                            column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name = "zipcode",
-                    column = @Column(name = "WORK_ZIPCODE"))
-    })
-    private Address workAddress;
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name = "city",
+//                            column = @Column(name = "WORK_CITY")),
+//            @AttributeOverride(name = "street",
+//                            column = @Column(name = "WORK_STREET")),
+//            @AttributeOverride(name = "zipcode",
+//                    column = @Column(name = "WORK_ZIPCODE"))
+//    })
+//    private Address workAddress;
 
     public Period getWorkPeriod() {
         return workPeriod;

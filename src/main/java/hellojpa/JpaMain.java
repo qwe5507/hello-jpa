@@ -16,12 +16,15 @@ public class JpaMain {
         tx.begin();
         //code
         try {
-            Member member = new Member();
-            member.setUsername("Hello");
-            member.setHomeAddress(new Address("city", "address", "zipcode"));
-            member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
+            Address address = new Address("city", "address", "zipcode");
 
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
+            
+            Address newAddress = new Address("newCity", address.getStreet(), address.getZipcode());
+            member.setHomeAddress(newAddress);
 
             tx.commit();
         } catch (Exception e) {
